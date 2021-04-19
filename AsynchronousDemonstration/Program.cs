@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace AsynchronousDemonstration
@@ -10,9 +11,17 @@ namespace AsynchronousDemonstration
             var greeter = new Greeter();
 
             Console.WriteLine("====Awaiting Asynchronously====");
+            var watcher = new Stopwatch();
+            watcher.Start();
             await AwaitingAsynchronous(greeter);
+            watcher.Stop();
+            Console.WriteLine($"Executed time:{watcher.Elapsed:%s} seconds");
+            watcher.Reset();
             Console.WriteLine("====Awaiting in order====");
+            watcher.Start();
             await AwaitingInOrder(greeter);
+            watcher.Stop();
+            Console.WriteLine($"Executed time:{watcher.Elapsed:%s} seconds");
 
             Console.ReadLine();
         }
